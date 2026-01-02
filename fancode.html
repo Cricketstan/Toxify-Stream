@@ -830,29 +830,24 @@
         }
         
         function handlePopup() {
-            const popup = document.getElementById('telegram-popup');
-            const closeBtn = document.getElementById('close-popup-btn');
-            const joinBtn = document.getElementById('join-btn');
-            const POPUP_KEY = 'telegramPopupDismissed';
+    const popup = document.getElementById('telegram-popup');
+    const closeBtn = document.getElementById('close-popup-btn');
+    const joinBtn = document.getElementById('join-btn');
 
-            if (localStorage.getItem(POPUP_KEY)) {
-                return;
-            }
+    // show popup every time (after delay)
+    setTimeout(() => {
+        popup.classList.add('show');
+    }, 3000);
 
-            setTimeout(() => {
-                popup.classList.add('show');
-            }, 3000);
+    function dismissPopup() {
+        popup.classList.remove('show');
+    }
 
-            function dismissPopup() {
-                popup.classList.remove('show');
-                localStorage.setItem(POPUP_KEY, 'true');
-            }
-
-            closeBtn.addEventListener('click', dismissPopup);
-            joinBtn.addEventListener('click', () => {
-                setTimeout(dismissPopup, 500); 
-            });
+    closeBtn.addEventListener('click', dismissPopup);
+    joinBtn.addEventListener('click', dismissPopup);
         }
+
+            
 
         document.addEventListener('DOMContentLoaded', () => {
             createParticles();
